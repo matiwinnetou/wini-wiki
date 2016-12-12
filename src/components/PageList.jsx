@@ -1,0 +1,33 @@
+import styles from './../styles/styles.scss';
+
+import React from 'react';
+
+import Paper from 'material-ui/Paper';
+import { List } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import FontIcon from 'material-ui/FontIcon';
+
+import PageItemContainer from "./PageItemContainer.jsx";
+
+const PageList = ({ pages }) => {
+    return (
+      <div>
+        <Paper className={styles.column} zDepth={2}>
+          <List>
+            <Subheader>Pages</Subheader>
+            {
+              pages.map(page => {
+                return <PageItemContainer 
+                  key={page.id}
+                  page={page}
+               />
+              })
+            }
+          </List>
+        </Paper>
+      </div>
+    )
+}
+
+export default PageList;

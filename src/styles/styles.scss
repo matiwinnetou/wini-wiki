@@ -1,0 +1,26 @@
+@import "~flexboxgrid-sass/flexboxgrid";
+
+.column {
+    height: 800px;
+}
+
+.u-margin-left-right-10 {
+    margin: 0px 10px 0px 10px;
+}
+
+.u-margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.editor {
+    background-color: rgb(111, 232, 232);
+}
+
+.display {
+    background-color: rgb(232, 232, 232);
+}
+
+p, li {
+    margin: 0;
+    padding: 0;
+}
