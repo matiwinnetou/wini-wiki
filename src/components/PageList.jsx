@@ -1,20 +1,31 @@
-import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
-import {List, ListItem} from 'material-ui/List';
+import { List } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
+import FontIcon from 'material-ui/FontIcon';
+
+import PageItem from "./PageItem.jsx";
 
 import React, { Component } from 'react';
 
 class PageList extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { pages: ["tinc", "me"] } ;
+  }
+
   render() {
     return (
       <div>
-        <Paper>
+        <Paper zDepth={2}>
           <List>
             <Subheader>Pages</Subheader>
-            {Array(10).fill(1).map((el, i) =>
-                <ListItem primaryText={i} />
-            )}
+            {
+              this.state.pages.map(pageName => {
+                return <PageItem pageName={pageName} />
+              })
+            }
           </List>
         </Paper>
       </div>

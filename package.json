@@ -21,11 +21,11 @@
     "firebase": "^3.6.3",
     "flexboxgrid-sass": "^8.0.5",
     "material-ui": "^0.16.5",
-    "node-sass": "^3.13.0",
+    "node-sass": "^4.0.0",
     "react": "^15.4.1",
     "react-dom": "15.4.1",
     "react-tap-event-plugin": "^2.0.1",
-    "sass-loader": "^4.0.2",
+    "sass-loader": "^4.1.0",
     "style-loader": "^0.13.1"
   },
   "devDependencies": {
