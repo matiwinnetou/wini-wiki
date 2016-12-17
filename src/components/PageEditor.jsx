@@ -15,7 +15,7 @@ class PageEditor extends React.Component {
         const { pageName } = this.props;
 
         return (
-            <Paper zDepth={2}>
+            <Paper className={styles.column} zDepth={2}>
                 <div className={styles['u-margin-left-right-10']}>
                     <Textfield
                         multiLine={true}

@@ -1,3 +1,5 @@
+import styles from './../styles/styles.scss';
+
 import Paper from 'material-ui/Paper';
 import { List } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -18,7 +20,7 @@ class PageList extends React.Component {
   render() {
     return (
       <div>
-        <Paper zDepth={2}>
+        <Paper className={styles.column} zDepth={2}>
           <List>
             <Subheader>Pages</Subheader>
             {

@@ -1,21 +1,21 @@
 @import "~flexboxgrid-sass/flexboxgrid";
 
-.mainContainer {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+// .mainContainer {
+//     min-height: 100%;
+//     display: flex;
+//     flex-direction: column;
+// }
 
-.mainContainerItem {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+// .mainContainerItem {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+// }
 
-.redBg {
-    background-color: red;
- }
+.column {
+    height: 800px;
+}
 
 .u-margin-left-right-10 {
     margin: 0px 10px 0px 10px;
