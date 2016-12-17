@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
       <div>
         <div className={classnames(styles.wrapper)}>
-          <TopBar name="M" />
+          <TopBar />
 
           <div className={styles.row}>
             <div className={styles['col-xs-2']}>
