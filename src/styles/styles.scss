@@ -1,13 +1,21 @@
 @import "~flexboxgrid-sass/flexboxgrid";
 
+.mainContainer {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContainerItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .redBg {
     background-color: red;
  }
-
-.full-monty {
-    height: 100%;
-    width: 100%;
-}
 
 .u-margin-left-right-10 {
     margin: 0px 10px 0px 10px;
