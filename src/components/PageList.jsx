@@ -25,7 +25,7 @@ class PageList extends React.Component {
             <Subheader>Pages</Subheader>
             {
               this.state.pages.map(pageName => {
-                return <PageItem pageName={pageName} />
+                return <PageItem key={pageName} pageName={pageName} />
               })
             }
           </List>

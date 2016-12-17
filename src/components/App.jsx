@@ -4,8 +4,7 @@ import classnames from "classnames";
 import React from 'react';
 import PageList from './PageList';
 import PageEditor from "./PageEditor";
-
-import AppBar from 'material-ui/AppBar';
+import TopBar from "./TopBar";
 
 class App extends React.Component {
 
@@ -13,23 +12,11 @@ class App extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    document.body.style.backgroundColor = "teal";
-  }
-
-  componentWillUnmount() {
-    document.body.style.backgroundColor = null;
-  }
-
   render() {
     return (
       <div>
         <div className={classnames(styles.wrapper)}>
-
-          <div className={styles['u-margin-bottom-5']}>
-            <AppBar title="Wini Wiki"
-              showMenuIconButton={false} />
-          </div>
+          <TopBar name="M" />
 
           <div className={styles.row}>
             <div className={styles['col-xs-2']}>

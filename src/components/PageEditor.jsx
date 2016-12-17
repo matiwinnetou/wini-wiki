@@ -18,6 +18,7 @@ class PageEditor extends React.Component {
             <Paper className={styles.column} zDepth={2}>
                 <div className={styles['u-margin-left-right-10']}>
                     <Textfield
+                        id="markdown-editor"
                         multiLine={true}
                         disabled={true}
                         rows={10}
