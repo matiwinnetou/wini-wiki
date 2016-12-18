@@ -18,10 +18,10 @@ class PageList extends React.Component {
   }
 
   createPage() {
-    const stateCopy = Object.assign({}, this.state);
-    stateCopy.pages.push("New Page");
+    const pagesCopy = this.state.pages.slice();
+    pagesCopy.push("New Page");
 
-    this.setState(stateCopy);
+    this.setState({pages: pagesCopy});
   }
 
   render() {

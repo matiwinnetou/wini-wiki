@@ -31,7 +31,7 @@ class App extends React.Component {
 
             <div className={styles['col-xs-10']}>
               <div className={styles.box}>
-                <PageEditor />
+                <PageEditor pageCount={0} />
               </div>
             </div>
           </div>

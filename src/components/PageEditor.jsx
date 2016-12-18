@@ -23,11 +23,16 @@ class PageEditor extends React.Component {
     }
 
     handleOnChange(e) {
-        const text = e.target.value;
-        const stateCopy = Object.assign({}, this.state);
-        stateCopy.editorValue = text;
+        const newText = e.target.value;
+        this.setState({editorValue: e.target.value});
+    }
 
-        this.setState(stateCopy);
+    shouldBeEditorDisabled() {
+        if (this.props.pageCount === 0) {
+            return true;
+        }
+
+        return this.state.editorDisabled;
     }
 
     render() {
@@ -39,7 +44,7 @@ class PageEditor extends React.Component {
                     <Textfield
                         id="markdown-editor"
                         multiLine={true}
-                        disabled={this.state.editorDisabled}
+                        disabled={this.shouldBeEditorDisabled()}
                         rows={10}
                         value={this.state.editorValue}
                         fullWidth={true}
@@ -53,5 +58,14 @@ class PageEditor extends React.Component {
     }
     
 }
+
+// it makes no sense to allow editing anything when pageCount = 0
+PageEditor.propTypes = {
+  pageCount: React.PropTypes.number.isRequired
+};
+
+PageEditor.defaultProps = {
+  pageCount: 0
+};
 
 export default PageEditor;
