@@ -9,6 +9,25 @@ class PageEditor extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state = { 
+            editorValue: '',
+            editorDisabled: true
+        }
+    }
+
+    handleOnClick() {
+        const stateCopy = Object.assign({}, this.state);
+        stateCopy.editorDisabled = false;
+
+        this.setState(stateCopy);
+    }
+
+    handleOnChange(e) {
+        const text = e.target.value;
+        const stateCopy = Object.assign({}, this.state);
+        stateCopy.editorValue = text;
+
+        this.setState(stateCopy);
     }
 
     render() {
@@ -20,10 +39,12 @@ class PageEditor extends React.Component {
                     <Textfield
                         id="markdown-editor"
                         multiLine={true}
-                        disabled={true}
+                        disabled={this.state.editorDisabled}
                         rows={10}
-                        value="sss"
+                        value={this.state.editorValue}
                         fullWidth={true}
+                        onChange={this.handleOnChange.bind(this)}
+                        onTouchTap={this.handleOnClick.bind(this)}
                         underlineShow={false}
                         />
                 </div>

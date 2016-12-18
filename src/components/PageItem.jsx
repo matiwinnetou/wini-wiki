@@ -13,7 +13,6 @@ class PageItem extends React.Component {
     }
 
     handleDeleteClick() {
-        alert('delete action here');
     }
 
     render() {
