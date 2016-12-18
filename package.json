@@ -1,20 +1,19 @@
 {
   "name": "winne-wiki",
   "version": "0.0.3",
-  "description": "React Webpack Babel Starter Kit",
+  "description": "Wini Wiki - react wiki",
   "main": "''",
   "scripts": {
     "build": "webpack --config webpack.production.config.js --progress --profile --colors",
-    "start": "webpack-dev-server --host 0.0.0.0 --progress --colors",
-    "lint": "eslint --ext js --ext jsx src || exit 0"
+    "start": "webpack-dev-server --host 0.0.0.0 --progress --colors"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alicoding/react-webpack-babel"
+    "url": "https://github.com/matiwinnetou/wini-wiki"
   },
-  "author": "Ali Al Dallal",
+  "author": "Mateusz Czeladka",
   "license": "MIT",
-  "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
+  "homepage": "https://github.com/matiwinnetou/wini-wiki#readme",
   "dependencies": {
     "chance": "^1.0.4",
     "classnames": "^2.2.5",
