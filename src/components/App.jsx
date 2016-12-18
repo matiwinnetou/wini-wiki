@@ -1,7 +1,7 @@
 import styles from './../styles/styles.scss';
 import classnames from "classnames";
 
-import React from 'react';
+import React, { Component } from 'react';
 import PageList from './PageList';
 import PageEditor from "./PageEditor";
 import TopBar from "./TopBar";
@@ -12,26 +12,26 @@ class App extends React.Component {
     super(props);
   }
 
-  handlePageCreate() {
-    this.refs.foo.createPage();
-  }
-
   render() {
     return (
       <div>
         <div className={classnames(styles.wrapper)}>
-          <TopBar onCreatePage={this.handlePageCreate.bind(this)} />
+          <TopBar onPageCreate={this.props.onPageCreate} />
 
           <div className={styles.row}>
             <div className={styles['col-xs-2']}>
               <div className={styles.box}>
-                <PageList ref='foo' />
+                <PageList 
+                  store={this.props.store}
+                  onPageSelect={this.props.onPageSelect}
+                  onPageRemove={this.props.onPageRemove}
+                />
               </div>
             </div>
 
             <div className={styles['col-xs-10']}>
               <div className={styles.box}>
-                <PageEditor pageCount={0} />
+                <PageEditor store={this.props.store} />
               </div>
             </div>
           </div>
@@ -40,5 +40,11 @@ class App extends React.Component {
     )
   }
 }
+
+App.propTypes = {
+  onPageSelect: React.PropTypes.func.isRequired,
+  onPageCreate: React.PropTypes.func.isRequired,
+  onPageRemove: React.PropTypes.func.isRequired
+};
 
 export default App;

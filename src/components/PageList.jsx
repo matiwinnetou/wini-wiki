@@ -7,52 +7,32 @@ import Subheader from 'material-ui/Subheader';
 import FontIcon from 'material-ui/FontIcon';
 
 import PageItem from "./PageItem.jsx";
-import Chance from "chance";
 
 import React, { Component } from 'react';
-
-const chance = new Chance();
 
 class PageList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { pages: [] };
-  }
-
-  createPage() {
-    const pagesCopy = this.state.pages.slice();
-    const pageKey = chance.string();
-    const pageName = "New Page-" + pageKey.substring(0, 2);
-
-    const page = {
-      name: pageName,
-      key: pageKey
-    }
-
-    pagesCopy.push(page);
-
-    this.setState({pages: pagesCopy});
-  }
-
-  removePage(pageKey) {
-    const newPages = this.state.pages.filter(page => page.key !== pageKey);
-
-    this.setState({pages: newPages});
+    this.props.store.subscribe(() => this.forceUpdate());
   }
 
   render() {
+    const { store } = this.props,
+      pages = store.getState().pages;
     return (
       <div>
         <Paper className={styles.column} zDepth={2}>
           <List>
             <Subheader>Pages</Subheader>
             {
-              this.state.pages.map((page, i) => {
-                const pageName = page.name;
-                const pageKey = page.key;
-                
-                return <PageItem key={pageKey} pageName={pageName} onPageRemoved={() => this.removePage(pageKey)} />
+              pages.map(page => {
+                return <PageItem 
+                  key={page.id}
+                  id={page.id}
+                  pageName={page.name}
+                  onPageSelect={() => this.props.onPageSelect(page.id)}
+                  onPageRemove={() => this.props.onPageRemove(page.id)} />
               })
             }
           </List>
@@ -61,5 +41,10 @@ class PageList extends React.Component {
     )
   }
 }
+
+PageList.propTypes = {
+  onPageSelect: React.PropTypes.func.isRequired,
+  onPageRemove: React.PropTypes.func.isRequired
+};
 
 export default PageList;

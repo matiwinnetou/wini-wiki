@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -9,19 +9,19 @@ class PageItem extends React.Component {
 
     constructor(props) {
         super(props)
-        this.deleteElement = <FlatButton primary={true} icon={<DeleteIcon />} onTouchTap={this.handleDeleteClick.bind(this)} />
-    }
-
-    handleDeleteClick() {
-        this.props.onPageRemoved();
+        const { id } = this.props;
+        this.deleteElement = <FlatButton primary={true} icon={<DeleteIcon />} onTouchTap={() => this.props.onPageRemove(id)} />
     }
 
     render() {
-        const { pageName } = this.props; 
+        const { id } = this.props;
 
         return (
-            <div id={pageName}>
-                <ListItem primaryText={pageName} rightIconButton={this.deleteElement} />
+            <div>
+                <ListItem 
+                    primaryText={this.props.pageName}
+                    onTouchTap={() => this.props.onPageSelect(id)}
+                    rightIconButton={this.deleteElement} />
                 <Divider />
             </div>
         )
@@ -30,13 +30,9 @@ class PageItem extends React.Component {
 }
 
 PageItem.propTypes = {
-  pageName: React.PropTypes.string,
-  onPageRemoved: React.PropTypes.func
-};
-
-PageItem.defaultProps = {
-  pageName: "New Page",
-  onPageRemoved: () =>  {}
+  pageName: React.PropTypes.string.isRequired,
+  onPageSelect: React.PropTypes.func.isRequired,
+  onPageRemove: React.PropTypes.func.isRequired
 };
 
 export default PageItem;

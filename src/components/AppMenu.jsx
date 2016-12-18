@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
@@ -13,9 +13,8 @@ class AppMenu extends React.Component {
   render() {
     return (
       <div>
-        <Popover 
-            open={this.props.open}
-            onRequestClose={this.props.onMenuClose}
+        <Popover
+            onRequestClose={() => {}}
         >
           <Menu>
             <MenuItem onTouchTap={this.props.onCreatePage}>Create Page</MenuItem>
@@ -27,12 +26,10 @@ class AppMenu extends React.Component {
 }
 
 AppMenu.propTypes = {
-  onMenuClose: React.PropTypes.func.isRequired,
   onCreatePage: React.PropTypes.func.isRequired
 };
 
 AppMenu.defaultProps = {
-  onMenuClose: () => {},
   onCreatePage: () => {}
 };
 
