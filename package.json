@@ -16,6 +16,7 @@
   "license": "MIT",
   "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
   "dependencies": {
+    "chance": "^1.0.4",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "firebase": "^3.6.3",
