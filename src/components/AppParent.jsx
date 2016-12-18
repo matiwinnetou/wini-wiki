@@ -24,4 +24,5 @@ class AppParent extends React.Component {
         );
     }
 }
+
 export default AppParent;

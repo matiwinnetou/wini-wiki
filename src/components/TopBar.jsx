@@ -12,8 +12,12 @@ class TopBar extends React.Component {
     this.state = { open: false };
   }
 
-  handleTouchMap() {
-    this.setState({ open: !this.state.open });
+  handleMenuOpen() {
+    this.setState({ open: true });
+  }
+
+  handleMenuClose() {
+    this.setState({ open: false });
   }
 
   render() {
@@ -21,9 +25,11 @@ class TopBar extends React.Component {
       <div className={styles['u-margin-bottom-5']}>
         <AppBar
         title="Wini Wiki"
-        onLeftIconButtonTouchTap={ this.handleTouchMap.bind(this) }
+        onLeftIconButtonTouchTap={ this.handleMenuOpen.bind(this) }
         />
-        <AppMenu open={this.state.open} />
+        <AppMenu 
+          open={this.state.open}
+          onMenuClose={ this.handleMenuClose.bind(this) } />
       </div>
     )
   }

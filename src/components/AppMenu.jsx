@@ -10,18 +10,12 @@ class AppMenu extends React.Component {
     super(props);
   }
 
-  handleRequestClose() {
-    this.setState({
-      open: false,
-    });
-  };
-
   render() {
     return (
       <div>
         <Popover 
             open={this.props.open}
-            onRequestClose={this.handleRequestClose.bind(this)}
+            onRequestClose={this.props.onMenuClose}
         >
           <Menu>  
             <MenuItem>Create Page</MenuItem>
@@ -31,4 +25,9 @@ class AppMenu extends React.Component {
     );
   }
 }
+
+AppMenu.propTypes = {
+  onMenuClose: React.PropTypes.func.isRequired
+};
+
 export default AppMenu;
