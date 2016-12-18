@@ -12,16 +12,20 @@ class App extends React.Component {
     super(props);
   }
 
+  handlePageCreate() {
+    this.refs.foo.createPage();
+  }
+
   render() {
     return (
       <div>
         <div className={classnames(styles.wrapper)}>
-          <TopBar />
+          <TopBar onCreatePage={this.handlePageCreate.bind(this)} />
 
           <div className={styles.row}>
             <div className={styles['col-xs-2']}>
               <div className={styles.box}>
-                <PageList />
+                <PageList ref='foo' />
               </div>
             </div>
 

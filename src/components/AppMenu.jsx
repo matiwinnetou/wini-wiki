@@ -17,8 +17,8 @@ class AppMenu extends React.Component {
             open={this.props.open}
             onRequestClose={this.props.onMenuClose}
         >
-          <Menu>  
-            <MenuItem>Create Page</MenuItem>
+          <Menu>
+            <MenuItem onTouchTap={this.props.onCreatePage}>Create Page</MenuItem>
          </Menu>
         </Popover>
       </div>
@@ -27,7 +27,13 @@ class AppMenu extends React.Component {
 }
 
 AppMenu.propTypes = {
-  onMenuClose: React.PropTypes.func.isRequired
+  onMenuClose: React.PropTypes.func.isRequired,
+  onCreatePage: React.PropTypes.func.isRequired
+};
+
+AppMenu.defaultProps = {
+  onMenuClose: () => {},
+  onCreatePage: () => {}
 };
 
 export default AppMenu;

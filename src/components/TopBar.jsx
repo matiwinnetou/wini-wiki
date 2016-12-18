@@ -12,12 +12,26 @@ class TopBar extends React.Component {
     this.state = { open: false };
   }
 
-  handleMenuOpen() {
+  openMenu() {
     this.setState({ open: true });
   }
 
-  handleMenuClose() {
+  closeMenu() {
     this.setState({ open: false });
+  }
+
+  handleMenuOpen() {
+    this.openMenu();
+  }
+
+  handleMenuClose() {
+    this.closeMenu();
+  }
+
+  handlePageCreate() {
+    this.closeMenu();
+    // bubble up
+    this.props.onCreatePage();
   }
 
   render() {
@@ -27,13 +41,22 @@ class TopBar extends React.Component {
         title="Wini Wiki"
         onLeftIconButtonTouchTap={ this.handleMenuOpen.bind(this) }
         />
-        <AppMenu 
+        <AppMenu
           open={this.state.open}
-          onMenuClose={ this.handleMenuClose.bind(this) } />
+          onMenuClose={this.handleMenuClose.bind(this)}
+          onCreatePage={this.handlePageCreate.bind(this)}
+        />
       </div>
     )
   }
-
 }
+
+TopBar.propTypes = {
+  onCreatePage: React.PropTypes.func.isRequired
+};
+
+TopBar.defaultProps = {
+  onCreatePage: () => {}
+};
 
 export default TopBar;

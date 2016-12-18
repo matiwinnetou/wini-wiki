@@ -14,7 +14,14 @@ class PageList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { pages: ["tinc", "me"] } ;
+    this.state = { pages: [] };
+  }
+
+  createPage() {
+    const stateCopy = Object.assign({}, this.state);
+    stateCopy.pages.push("New Page");
+
+    this.setState(stateCopy);
   }
 
   render() {
@@ -24,8 +31,9 @@ class PageList extends React.Component {
           <List>
             <Subheader>Pages</Subheader>
             {
-              this.state.pages.map(pageName => {
-                return <PageItem key={pageName} pageName={pageName} />
+              this.state.pages.map((pageName, i) => {
+                const pageItemKey = `${pageName}-${i}`;
+                return <PageItem key={pageItemKey} pageName={pageName} />
               })
             }
           </List>
