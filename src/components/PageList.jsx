@@ -24,6 +24,13 @@ class PageList extends React.Component {
     this.setState({pages: pagesCopy});
   }
 
+  removePage() {
+    console.log("on page removed");
+    const pagesCopy = this.state.pages.slice(1);
+
+    this.setState({pages: pagesCopy});
+  }
+
   render() {
     return (
       <div>
@@ -33,7 +40,7 @@ class PageList extends React.Component {
             {
               this.state.pages.map((pageName, i) => {
                 const pageItemKey = `${pageName}-${i}`;
-                return <PageItem key={pageItemKey} pageName={pageName} />
+                return <PageItem key={pageItemKey} pageName={pageName} onPageRemoved={this.removePage.bind(this)} />
               })
             }
           </List>

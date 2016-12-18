@@ -9,10 +9,11 @@ class PageItem extends React.Component {
 
     constructor(props) {
         super(props)
-        this.deleteElement = <FlatButton primary={true} icon={<DeleteIcon />} onTouchTap={this.handleDeleteClick} />
+        this.deleteElement = <FlatButton primary={true} icon={<DeleteIcon />} onTouchTap={this.handleDeleteClick.bind(this)} />
     }
 
     handleDeleteClick() {
+        this.props.onPageRemoved();
     }
 
     render() {
@@ -29,7 +30,13 @@ class PageItem extends React.Component {
 }
 
 PageItem.propTypes = {
-  pageName: React.PropTypes.string
+  pageName: React.PropTypes.string,
+  onPageRemoved: React.PropTypes.func
+};
+
+PageItem.defaultProps = {
+  pageName: "New Page",
+  onPageRemoved: () =>  {}
 };
 
 export default PageItem;
