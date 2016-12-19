@@ -14,7 +14,10 @@ class PageList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.props.store.subscribe(() => this.forceUpdate());
+  }
+
+  componentDidMount() {
+      this.props.store.subscribe(() => this.forceUpdate());
   }
 
   render() {

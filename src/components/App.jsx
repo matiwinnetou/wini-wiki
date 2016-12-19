@@ -12,7 +12,10 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.store.subscribe(() => this.forceUpdate());
+  }
+
+  componentDidMount() {
+      this.props.store.subscribe(() => this.forceUpdate());
   }
 
   render() {
@@ -21,7 +24,7 @@ class App extends React.Component {
     
     return (
       <div>
-        <div className={classnames(styles.wrapper)}>
+        <div className={styles.wrapper}>
           <TopBar onPageCreate={this.props.onPageCreate} />
 
           <div className={styles.row}>

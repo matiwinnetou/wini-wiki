@@ -1,9 +1,11 @@
 import styles from './../styles/styles.scss';
 
 import React, { Component } from 'react';
+import classnames from "classnames";
 
 import Paper from 'material-ui/Paper';
 import m from "markdown";
+import * as helper from "../helper";
 
 const markdown = m.markdown;
 
@@ -11,38 +13,36 @@ class PageDisplay extends React.Component {
 
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
         this.props.store.subscribe(() => this.forceUpdate());
     }
 
     render() {
         const { store } = this.props;
         const state = store.getState();
-        const activePageId = state.activePageId;
-        const isDisabled = activePageId === null;
-        
-        let text = "";
-        if (isDisabled) {
-            text = "";
-        } else if (activePageId && state.pages.length > 0) {
-            const p = state.pages.find(page => page.id === activePageId);
-            if (p) {
-                text = p.text;
-            }
-        }
+        const data = helper.readText(state);
 
         return (
-            <Paper 
-                className={styles.column} 
+            <Paper
+                className={classnames(styles.column)}
                 zDepth={2}
+                style={{ backgroundColor: 'navajowhite' }}
                 onTouchTap={this.props.onToggleEdit}
-                dangerouslySetInnerHTML={{__html: markdown.toHTML(text)}} />
+                >
+                <div
+                    innerHtml={markdown.toHTML(data.text)}
+                />
+
+            </Paper>
         )
     }
-    
+
 }
 
 PageDisplay.propTypes = {
-  onToggleEdit: React.PropTypes.func.isRequired
+    onToggleEdit: React.PropTypes.func.isRequired
 };
 
 export default PageDisplay;
