@@ -18,11 +18,12 @@ const muiTheme = getMuiTheme({});
 
 const initialState = {
     activePageId: null,
+    editing: false,
     pages: [ 
         { 
             id: "test1",
             name: "Page1",
-            text: "test"
+            text: "Hello.\n\n* This is markdown.\n* It is fun\n* Love it or leave it."
         }
    ]
 }
@@ -45,6 +46,7 @@ class AppParent extends React.Component {
                             onPageCreate={() => store.dispatch(actions.createNewPage())}
                             onPageSelect={pageId => store.dispatch(actions.selectPage(pageId))}
                             onPageRemove={pageId => store.dispatch(actions.removePage(pageId))}
+                            onToggleEdit={() => store.dispatch(actions.toggleEditMode())}
                         />
                     </Provider>
                 </MuiThemeProvider>

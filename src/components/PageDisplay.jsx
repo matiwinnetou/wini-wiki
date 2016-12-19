@@ -2,13 +2,12 @@ import styles from './../styles/styles.scss';
 
 import React, { Component } from 'react';
 
-import Textfield from 'material-ui/Textfield';
 import Paper from 'material-ui/Paper';
 import m from "markdown";
 
 const markdown = m.markdown;
 
-class PageEditor extends React.Component {
+class PageDisplay extends React.Component {
 
     constructor(props) {
         super(props)
@@ -32,20 +31,18 @@ class PageEditor extends React.Component {
         }
 
         return (
-            <Paper className={styles.column} zDepth={2}>
-                <div className={styles['u-margin-left-right-10']}>
-                    <Textfield
-                        id="markdown-editor"
-                        multiLine={true}
-                        value={markdown.toHTML(text)}
-                        fullWidth={true}
-                        underlineShow={false}
-                        />
-                </div>
-            </Paper>
+            <Paper 
+                className={styles.column} 
+                zDepth={2}
+                onTouchTap={this.props.onToggleEdit}
+                dangerouslySetInnerHTML={{__html: markdown.toHTML(text)}} />
         )
     }
     
 }
 
-export default PageEditor;
+PageDisplay.propTypes = {
+  onToggleEdit: React.PropTypes.func.isRequired
+};
+
+export default PageDisplay;

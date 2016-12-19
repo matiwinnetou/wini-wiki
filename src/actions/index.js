@@ -28,3 +28,9 @@ export const selectPage = (pageId) => {
     id: pageId
   }
 }
+
+export const toggleEditMode = () => {
+  return {
+    type: 'TOGGLE_EDIT_MODE'
+  }
+}
