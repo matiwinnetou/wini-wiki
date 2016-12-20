@@ -47,7 +47,7 @@ class App extends React.Component {
                 { state.editing && 
                   <PageEditor 
                     store={this.props.store}
-                    onPageTextChange={() => {}}
+                    onPageTextChange={this.props.onPageTextChange}
                     onToggleEdit={this.props.onToggleEdit}
                   />
                 }
@@ -70,7 +70,8 @@ App.propTypes = {
   onPageSelect: React.PropTypes.func.isRequired,
   onPageCreate: React.PropTypes.func.isRequired,
   onPageRemove: React.PropTypes.func.isRequired,
-  onToggleEdit: React.PropTypes.func.isRequired
+  onToggleEdit: React.PropTypes.func.isRequired,
+  onPageTextChange: React.PropTypes.func.isRequired
 };
 
 export default App;

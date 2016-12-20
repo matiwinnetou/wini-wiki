@@ -10,19 +10,38 @@ const reducers = (state, action) => {
     }
 
     case "TOGGLE_EDIT_MODE": {
-      console.log(JSON.stringify(state));
+      if (state.activePageId === null) {
+        return Object.assign({}, state, state)
+      }
+
       return Object.assign({}, state, { editing: !state.editing })
     }
 
     case "DELETE_PAGE": {
       const pageId = action.id;
-
+      
       // TODO what happens when removed one is activePageId
       const newPages = state.pages.filter(page => page.id !== pageId);
 
       return Object.assign({}, state, {
+        activePageId: null,
         pages: newPages
       })
+    }
+
+    case "PAGE_TEXT_CHANGED": {
+      const pageId = action.id;
+      const newText = action.text;
+
+      const stateCopy = Object.assign({}, state);
+      
+      const page = stateCopy.pages.find(page => page.id === pageId);
+
+      if (page) {
+        page.text = newText;
+      }
+
+      return stateCopy;
     }
 
     default:

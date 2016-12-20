@@ -47,6 +47,7 @@ class AppParent extends React.Component {
                             onPageSelect={pageId => store.dispatch(actions.selectPage(pageId))}
                             onPageRemove={pageId => store.dispatch(actions.removePage(pageId))}
                             onToggleEdit={() => store.dispatch(actions.toggleEditMode())}
+                            onPageTextChange={(pageId, txt) => store.dispatch(actions.pageTextChanged(pageId, txt))}
                         />
                     </Provider>
                 </MuiThemeProvider>

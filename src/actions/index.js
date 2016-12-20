@@ -34,3 +34,13 @@ export const toggleEditMode = () => {
     type: 'TOGGLE_EDIT_MODE'
   }
 }
+
+export const pageTextChanged = (pageId, e) => {
+  const txt = e.target.value;
+  
+  return {
+    type: 'PAGE_TEXT_CHANGED',
+    id: pageId,
+    text: txt
+  }
+}
