@@ -35,6 +35,7 @@ class PageEditor extends React.Component {
                         className={classnames(styles.column, styles.display)}
                         multiLine={true}
                         value={data.text}
+                        onBlur={this.props.onToggleEdit}
                         onChange={txt => this.props.onPageTextChange(data.activePageId)}
                         fullWidth={true}
                         underlineShow={false}
