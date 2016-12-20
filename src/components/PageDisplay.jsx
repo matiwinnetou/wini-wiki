@@ -4,17 +4,15 @@ import React, { Component } from 'react';
 import classnames from "classnames";
 
 import Paper from 'material-ui/Paper';
-import m from "markdown";
-import * as helper from "../helper";
 
-const markdown = m.markdown;
+import MarkdownElement from "./MarkdownElement";
+import * as helper from "../helper";
 
 class PageDisplay extends React.Component {
 
     constructor(props) {
         super(props)
     }
-
 
     componentDidMount() {
         this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
@@ -36,8 +34,7 @@ class PageDisplay extends React.Component {
                 style={{ backgroundColor: 'navajowhite' }}
                 onTouchTap={this.props.onToggleEdit}
                 >
-                {console.log(markdown.toHTML(data.text))}
-                {markdown.toHTML(data.text)}
+                <MarkdownElement text={data.text} />
             </Paper>
         )
     }
