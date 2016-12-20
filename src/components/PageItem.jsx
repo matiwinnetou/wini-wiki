@@ -9,8 +9,16 @@ class PageItem extends React.Component {
 
     constructor(props) {
         super(props)
+    }
+
+    createDeleteElement() {
         const { id } = this.props;
-        this.deleteElement = <FlatButton primary={true} icon={<DeleteIcon />} onTouchTap={() => this.props.onPageRemove(id)} />
+
+        return <FlatButton 
+            primary={true}
+            icon={<DeleteIcon />}
+            onTouchTap={() => this.props.onPageRemove(id)}
+         />
     }
 
     render() {
@@ -18,10 +26,13 @@ class PageItem extends React.Component {
 
         return (
             <div>
+                <Dialog ref="dialog" title="Are you sure?" actions="">
+                    dialog content
+                </Dialog>
                 <ListItem 
                     primaryText={this.props.pageName}
                     onTouchTap={() => this.props.onPageSelect(id)}
-                    rightIconButton={this.deleteElement} />
+                    rightIconButton={this.createDeleteElement()} />
                 <Divider />
             </div>
         )

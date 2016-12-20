@@ -6,7 +6,10 @@ const reducers = (state, action) => {
     }
 
     case "CREATE_PAGE": {
-      return Object.assign({}, state, { pages: state.pages.concat(action.page) })
+      return Object.assign({}, state, {
+        editing: false,
+        pages: state.pages.concat(action.page)
+       })
     }
 
     case "TOGGLE_EDIT_MODE": {
@@ -20,7 +23,6 @@ const reducers = (state, action) => {
     case "DELETE_PAGE": {
       const pageId = action.id;
       
-      // TODO what happens when removed one is activePageId
       const newPages = state.pages.filter(page => page.id !== pageId);
 
       return Object.assign({}, state, {
