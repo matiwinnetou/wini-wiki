@@ -15,7 +15,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-      this.props.store.subscribe(() => this.forceUpdate());
+    this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   render() {
@@ -43,6 +47,7 @@ class App extends React.Component {
                 { state.editing && 
                   <PageEditor 
                     store={this.props.store}
+                    onPageTextChange={() => {}}
                     onToggleEdit={this.props.onToggleEdit}
                   />
                 }

@@ -15,7 +15,11 @@ class PageEditor extends React.Component {
     }
 
     componentDidMount() {
-        this.props.store.subscribe(() => this.forceUpdate());
+        this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {

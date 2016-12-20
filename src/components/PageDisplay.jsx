@@ -15,8 +15,13 @@ class PageDisplay extends React.Component {
         super(props)
     }
 
+
     componentDidMount() {
-        this.props.store.subscribe(() => this.forceUpdate());
+        this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {
@@ -31,10 +36,8 @@ class PageDisplay extends React.Component {
                 style={{ backgroundColor: 'navajowhite' }}
                 onTouchTap={this.props.onToggleEdit}
                 >
-                <div
-                    innerHtml={markdown.toHTML(data.text)}
-                />
-
+                {console.log(markdown.toHTML(data.text))}
+                {markdown.toHTML(data.text)}
             </Paper>
         )
     }
