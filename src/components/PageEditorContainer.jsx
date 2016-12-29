@@ -2,17 +2,19 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-import { findActivePage, toggleEditMode, pageTextChanged } from "../actions/index";
+import { findActivePage, leaveEditMode, pageTextChanged } from "../actions/index";
 import { bindActionCreators } from "redux";
+
+import { pure, compose, withHandlers } from "recompose";
 
 import PageEditor from "./PageEditor";
 
-const PageEditorContainer = ({ id, text, toggleEditMode, pageTextChanged }) => {
+const PageEditorContainer = ({ id, text, leaveEditMode, pageTextChanged }) => {
     return (
         <PageEditor
             id={id}
             text={text}
-            toggleEditMode={toggleEditMode}
+            leaveEditMode={leaveEditMode}
             pageTextChanged={pageTextChanged}
             />
     )
@@ -29,9 +31,20 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        toggleEditMode: toggleEditMode,
+        leaveEditMode: leaveEditMode,
         pageTextChanged: pageTextChanged
     }, dispatch);
 }
+
+// const enhance = compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     pure,
+//     withHandlers({
+//         leaveEditMode() {
+//             const { toggleEditMode } = this.props;
+//             toggleEditMode();
+//         }
+//     }),
+// );
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageEditorContainer);

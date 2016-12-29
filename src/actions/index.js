@@ -30,9 +30,15 @@ export const selectPage = (pageId) => {
   }
 }
 
-export const toggleEditMode = () => {
+export const leaveEditMode = () => {
   return {
-    type: 'TOGGLE_EDIT_MODE'
+    type: 'LEAVE_EDIT_MODE'
+  }
+}
+
+export const enterEditMode = () => {
+  return {
+    type: 'ENTER_EDIT_MODE'
   }
 }
 

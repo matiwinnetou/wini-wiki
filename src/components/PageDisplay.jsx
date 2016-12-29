@@ -6,13 +6,13 @@ import classnames from "classnames";
 import MarkdownElement from "./MarkdownElement";
 import Paper from 'material-ui/Paper';
 
-const PageDisplay = ({ text, toggleEditMode }) => {
+const PageDisplay = ({ text, enterEditMode }) => {
     return (
         <Paper
             className={classnames(styles.column)}
             zDepth={2}
             style={{ backgroundColor: 'navajowhite' }}
-            onTouchTap={toggleEditMode}
+            onTouchTap={enterEditMode}
             >
             <MarkdownElement text={text} />
         </Paper>

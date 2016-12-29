@@ -11,12 +11,20 @@ const reducers = (state, action) => {
       })
     }
 
-    case "TOGGLE_EDIT_MODE": {
+    case "ENTER_EDIT_MODE": {
       if (state.activePageId === null) {
         return Object.assign({}, state, state)
       }
 
-      return Object.assign({}, state, { editing: !state.editing })
+      return Object.assign({}, state, { editing: true })
+    }
+
+    case "LEAVE_EDIT_MODE": {
+      if (state.activePageId === null) {
+        return Object.assign({}, state, state)
+      }
+
+      return Object.assign({}, state, { editing: false })
     }
 
     case "DELETE_PAGE": {

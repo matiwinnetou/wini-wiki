@@ -2,14 +2,14 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-import { toggleEditMode } from "../actions/index";
+import { enterEditMode } from "../actions/index";
 import { bindActionCreators } from "redux";
 import PageDisplay from "./PageDisplay";
 
-const PageDisplayContainer = ({ text, toggleEditMode }) => {
+const PageDisplayContainer = ({ text, enterEditMode }) => {
     return (
         <PageDisplay
-            toggleEditMode={toggleEditMode}
+            enterEditMode={enterEditMode}
             text={text}
         />
     )
@@ -25,7 +25,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        toggleEditMode: toggleEditMode
+        enterEditMode: enterEditMode
     }, dispatch);
 }
 
