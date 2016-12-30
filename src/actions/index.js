@@ -1,5 +1,5 @@
 import Chance from "chance";
-import * as api from "../api";
+import firebase from "../myfirebase";
 
 const chance = new Chance();
 
@@ -50,17 +50,7 @@ export const pageTextChanged = (pageId, txt) => {
   }
 }
 
-export const fetchPages = pages => {
-  return {
-    type: 'FETCHED_PAGES',
-    status: 'SUCCESS',
-    payload: {
-      pages: pages
-    }
-  }
-}
-
-export const storePage = pageId => {
+export const storePageSuccessAction = pageId => {
   return {
     type: 'STORED_PAGE',
     status: 'SUCCESS',
@@ -70,20 +60,45 @@ export const storePage = pageId => {
   }
 }
 
-export const storePageAsync = page => {
+export const storePage = page => {
   return dispatch => {
-    console.log(page.id);
-
-    dispatch(storePage(page.id));
+    console.log("Storing:" + page.id);
+    firebase.database().ref(`pages/${page.id}`).set({
+      id: page.id,
+      text: page.text
+    }).then(f => {
+      dispatch(storePageSuccessAction(page.id))
+    });
   }
 }
 
-export const fetchPagesAsync = () => {
+export const fetchPagesSuccessAction = pages => {
+  return {
+    type: 'FETCHED_PAGES',
+    status: 'SUCCESS',
+    payload: {
+      pages: pages
+    }
+  }
+}
+
+export const fetchPagesFailureAction = errMsg => {
+  return {
+    type: 'FETCHED_PAGES',
+    status: 'FAILURE',
+    errorMsg: errMsg,
+    payload: {
+      pages: []
+    }
+  }
+}
+
+export const fetchPages = () => {
   return dispatch => {
     firebase.database().ref('pages').once('value').then(snapshot => {
       const v = snapshot.val();
-      console.log(v);
-      dispatch(fetchPages([]));
+      console.log("DB answered:" + v);
+      dispatch(fetchPagesSuccessAction([]));
     });
   }
 }

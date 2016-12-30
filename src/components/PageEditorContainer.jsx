@@ -36,15 +36,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-// const enhance = compose(
-//     connect(mapStateToProps, mapDispatchToProps),
-//     pure,
-//     withHandlers({
-//         leaveEditMode() {
-//             const { toggleEditMode } = this.props;
-//             toggleEditMode();
-//         }
-//     }),
-// );
-
 export default connect(mapStateToProps, mapDispatchToProps)(PageEditorContainer);

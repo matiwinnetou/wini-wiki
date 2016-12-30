@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchPagesAsync } from "../actions/index";
+import { fetchPages } from "../actions/index";
 
 import { pure, compose, lifecycle} from "recompose";
 
@@ -24,7 +24,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        fetchPagesAsync: fetchPagesAsync
+        fetchPages: fetchPages
     }, dispatch);
 }
 
@@ -33,8 +33,8 @@ const enhance = compose(
     pure,
     lifecycle({
         componentDidMount() {
-            const { fetchPagesAsync } = this.props;
-            fetchPagesAsync.call();
+            const { fetchPages } = this.props;
+            fetchPages();
         }
     })
 );
