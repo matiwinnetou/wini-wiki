@@ -2,24 +2,24 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-import { enterEditMode } from "../actions/index";
+import { enterEditMode, findActivePage} from "../actions/index";
 import { bindActionCreators } from "redux";
 import PageDisplay from "./PageDisplay";
 
-const PageDisplayContainer = ({ text, enterEditMode }) => {
+const PageDisplayContainer = ({ pageText, enterEditMode }) => {
     return (
         <PageDisplay
             enterEditMode={enterEditMode}
-            text={text}
+            pageText={pageText}
         />
     )
 }
 
 function mapStateToProps(state) {
-    const activePage = state.pages.find(page => page.id === state.activePageId);
+    const activePage = findActivePage(state.pages, state.activePageId);
 
     return {
-        text: activePage ? activePage.text : ""
+        pageText: activePage ? activePage.text : ""
     };
 }
 

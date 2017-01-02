@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from "react-redux";
 import firebase from "firebase";
-import { pure, compose, lifecycle} from "recompose";
+import { pure, compose} from "recompose";
 
 import App from "./App";
 

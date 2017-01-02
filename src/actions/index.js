@@ -19,20 +19,27 @@ export const createNewPage = () => {
 export const removePage = (pageId) => {
   return {
     type: 'DELETE_PAGE',
-    id: pageId
+    pageId: pageId
   }
 }
 
 export const selectPage = (pageId) => {
   return {
     type: 'SELECT_PAGE',
-    id: pageId
+    pageId: pageId
   }
 }
 
-export const leaveEditMode = () => {
+export const leaveEditModeSuccessAction = () => {
   return {
     type: 'LEAVE_EDIT_MODE'
+  }
+}
+
+export const leaveEditMode = (pageId, pageText) => {
+  return dispatch => {
+    dispatch(leaveEditModeSuccessAction());
+    storePage(pageId, pageText)(dispatch); // asynchronusly save page
   }
 }
 
@@ -42,11 +49,11 @@ export const enterEditMode = () => {
   }
 }
 
-export const pageTextChanged = (pageId, txt) => {
+export const pageTextChanged = (pageId, pageText) => {
   return {
     type: 'PAGE_TEXT_CHANGED',
-    id: pageId,
-    text: txt
+    pageId: pageId,
+    pageText: pageText
   }
 }
 
@@ -60,14 +67,14 @@ export const storePageSuccessAction = pageId => {
   }
 }
 
-export const storePage = page => {
+export const storePage = (pageId, pageText) => {
   return dispatch => {
     console.log("Storing:" + page.id);
     firebase.database().ref(`pages/${page.id}`).set({
-      id: page.id,
-      text: page.text
-    }).then(f => {
-      dispatch(storePageSuccessAction(page.id))
+      pageId: pageId,
+      pageText: pageText
+    }).then(() => {
+      dispatch(storePageSuccessAction(pageId));
     });
   }
 }
@@ -96,9 +103,11 @@ export const fetchPagesFailureAction = errMsg => {
 export const fetchPages = () => {
   return dispatch => {
     firebase.database().ref('pages').once('value').then(snapshot => {
-      const v = snapshot.val();
-      console.log("DB answered:" + v);
+      console.log("DB answered:" + snapshot);
       dispatch(fetchPagesSuccessAction([]));
+    }).catch(e => {
+      console.log("error:" + e);
+      dispatch(fetchPagesFailureAction(e));
     });
   }
 }

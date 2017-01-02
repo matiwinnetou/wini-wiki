@@ -1,19 +1,17 @@
 import React from 'react';
+import { Provider } from 'react-redux'
+
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
 
 import { AppContainer as ReactHotLoaderAppContainer } from 'react-hot-loader';
 
-import AppContainer from './AppContainer';
-
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import thunk from 'redux-thunk';
-
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux'
-
-import createLogger from 'redux-logger';
 
 import reducers from '../reducers/index'
+import AppContainer from './AppContainer';
 
 const muiTheme = getMuiTheme({});
 

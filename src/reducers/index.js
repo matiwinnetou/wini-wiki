@@ -1,7 +1,7 @@
 const reducers = (state, action) => {
   switch (action.type) {
     case "SELECT_PAGE": {
-      return Object.assign({}, state, { activePageId: action.id })
+      return Object.assign({}, state, { activePageId: action.pageId })
     }
 
     case "CREATE_PAGE": {
@@ -40,10 +40,10 @@ const reducers = (state, action) => {
     case "PAGE_TEXT_CHANGED": {
       const stateCopy = Object.assign({}, state);
 
-      const page = stateCopy.pages.find(page => page.id === action.id);
+      const page = stateCopy.pages.find(page => page.id === action.pageId);
 
       if (page) {
-        page.text = action.text;
+        page.text = action.pageText;
       }
 
       return stateCopy;

@@ -9,11 +9,11 @@ import { pure, compose, withHandlers } from "recompose";
 
 import PageEditor from "./PageEditor";
 
-const PageEditorContainer = ({ id, text, leaveEditMode, pageTextChanged }) => {
+const PageEditorContainer = ({ pageId, pageText, leaveEditMode, pageTextChanged }) => {
     return (
         <PageEditor
-            id={id}
-            text={text}
+            pageId={pageId}
+            pageText={pageText}
             leaveEditMode={leaveEditMode}
             pageTextChanged={pageTextChanged}
             />
@@ -24,8 +24,8 @@ function mapStateToProps(state) {
     const activePage = findActivePage(state.pages, state.activePageId);
 
     return {
-        id: activePage ? activePage.id : null,
-        text: activePage ? activePage.text : ""
+        pageId: activePage ? activePage.id : null,
+        pageText: activePage ? activePage.text : ""
     };
 }
 
