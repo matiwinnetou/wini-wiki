@@ -3,20 +3,44 @@ import firebase from "../myfirebase";
 
 const chance = new Chance();
 
-export const createNewPage = () => {
-  const id = chance.apple_token();
-
+const createNewPageSuccessAction = (page) => {
   return {
     type: 'CREATE_PAGE',
-    page: {
-      id: id,
-      name: "New Page",
-      text: id
-    }
+    status: "SUCCESS",
+    page: page
   }
 }
 
-export const removePageSuccessAction = (pageId) => {
+const createNewPageFailureAction = (page) => {
+  return {
+    type: 'CREATE_PAGE',
+    status: "FAILURE",
+    page: page
+  }
+}
+
+export const createNewPage = () => {
+  const page = {
+      id: chance.apple_token(),
+      name: "New Page",
+      text: ''
+  };
+
+  return dispatch => {
+    firebase.database().ref("pages/" + page.id).set({
+      id: page.id,
+      name: page.name,
+      text: page.text
+    }).then(() => {
+      dispatch(createNewPageSuccessAction(page));
+    }).catch(ex => {
+      console.error("Store failed:" + ex);
+      dispatch(createNewPageFailureAction(page));
+    });
+  }
+}
+
+const removePageSuccessAction = (pageId) => {
   return {
     type: 'DELETE_PAGE',
     status: 'SUCCESS',
@@ -24,7 +48,7 @@ export const removePageSuccessAction = (pageId) => {
   }
 }
 
-export const removePageFailureAction = (pageId) => {
+const removePageFailureAction = (pageId) => {
   return {
     type: 'DELETE_PAGE',
     status: 'FAILURE',
@@ -50,7 +74,7 @@ export const selectPage = (pageId) => {
   }
 }
 
-export const leaveEditModeSuccessAction = () => {
+const leaveEditModeSuccessAction = () => {
   return {
     type: 'LEAVE_EDIT_MODE'
   }
@@ -76,7 +100,7 @@ export const pageTextChanged = (pageId, pageText) => {
   }
 }
 
-export const storePageSuccessAction = pageId => {
+const storePageSuccessAction = pageId => {
   return {
     type: 'STORED_PAGE',
     status: 'SUCCESS',
