@@ -39,7 +39,8 @@ export const leaveEditModeSuccessAction = () => {
 export const leaveEditMode = (pageId, pageText) => {
   return dispatch => {
     dispatch(leaveEditModeSuccessAction());
-    storePage(pageId, pageText)(dispatch); // asynchronusly save page
+
+    return storePage(pageId, pageText); // asynchronusly save page
   }
 }
 
