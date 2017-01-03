@@ -16,10 +16,30 @@ export const createNewPage = () => {
   }
 }
 
-export const removePage = (pageId) => {
+export const removePageSuccessAction = (pageId) => {
   return {
     type: 'DELETE_PAGE',
+    status: 'SUCCESS',
     pageId: pageId
+  }
+}
+
+export const removePageFailureAction = (pageId) => {
+  return {
+    type: 'DELETE_PAGE',
+    status: 'FAILURE',
+    pageId: pageId
+  }
+}
+
+export const removePage = (pageId) => {
+  return dispatch => {
+    console.log("Removing:" + pageId);
+    firebase.database().ref("pages/" + pageId).remove().then(() => {
+      dispatch(removePageSuccessAction(pageId));
+    }).catch(() => {
+      dispatch(removePageFailureAction(pageId));
+    });
   }
 }
 
@@ -68,17 +88,15 @@ export const storePageSuccessAction = pageId => {
 
 export const storePage = (pageId, pageName, pageText) => {
   return dispatch => {
-    console.log("Storing:" + pageId);
     firebase.database().ref("pages/" + pageId).set({
       id: pageId,
       name: pageName,
       text: pageText
     }).then(() => {
-      console.log("Store success");
       dispatch(storePageSuccessAction(pageId));
       dispatch(leaveEditMode());
     }).catch(ex => {
-      console.log("Store failed:" + ex);
+      console.error("Store failed:" + ex);
       dispatch(leaveEditMode());
     });
   }
@@ -109,16 +127,14 @@ export const fetchPages = () => {
   return dispatch => {
     firebase.database().ref('pages').once('value').then(snapshot => {
       const pages = [];
-      
+
       snapshot.forEach(childSnapshot => {
-        const page = childSnapshot.val();
-        console.log(JSON.stringify(page));
-        pages.push(page);
+        pages.push(childSnapshot.val());
       });
-      
+
       dispatch(fetchPagesSuccessAction(pages));
     }).catch(e => {
-      console.log("error:" + e);
+      console.error("Error:" + e);
       dispatch(fetchPagesFailureAction(e));
     });
   }

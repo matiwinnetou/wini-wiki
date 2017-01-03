@@ -11,7 +11,7 @@ const PageItem = ({page, selectPage, removePage}) => {
             <ListItem
                 primaryText={page.name}
                 onTouchTap={() => selectPage(page.id)}
-                rightIconButton={<PageItemDelete id={page.id} removePage={removePage} />}
+                rightIconButton={<PageItemDelete pageId={page.id} removePage={removePage} />}
              />
             <Divider />
         </div>
