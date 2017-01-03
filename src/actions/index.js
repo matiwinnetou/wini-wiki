@@ -4,12 +4,12 @@ import firebase from "../myfirebase";
 const chance = new Chance();
 
 export const createNewPage = () => {
-  const id = chance.string();
+  const id = chance.apple_token();
 
   return {
     type: 'CREATE_PAGE',
     page: {
-      id: chance.string(),
+      id: id,
       name: "New Page",
       text: id
     }
@@ -36,11 +36,9 @@ export const leaveEditModeSuccessAction = () => {
   }
 }
 
-export const leaveEditMode = (pageId, pageText) => {
+export const leaveEditMode = () => {
   return dispatch => {
     dispatch(leaveEditModeSuccessAction());
-
-    return storePage(pageId, pageText); // asynchronusly save page
   }
 }
 
@@ -68,14 +66,20 @@ export const storePageSuccessAction = pageId => {
   }
 }
 
-export const storePage = (pageId, pageText) => {
+export const storePage = (pageId, pageName, pageText) => {
   return dispatch => {
-    console.log("Storing:" + page.id);
-    firebase.database().ref(`pages/${page.id}`).set({
-      pageId: pageId,
-      pageText: pageText
+    console.log("Storing:" + pageId);
+    firebase.database().ref("pages/" + pageId).set({
+      id: pageId,
+      name: pageName,
+      text: pageText
     }).then(() => {
+      console.log("Store success");
       dispatch(storePageSuccessAction(pageId));
+      dispatch(leaveEditMode());
+    }).catch(ex => {
+      console.log("Store failed:" + ex);
+      dispatch(leaveEditMode());
     });
   }
 }
@@ -104,8 +108,15 @@ export const fetchPagesFailureAction = errMsg => {
 export const fetchPages = () => {
   return dispatch => {
     firebase.database().ref('pages').once('value').then(snapshot => {
-      console.log("DB answered:" + snapshot);
-      dispatch(fetchPagesSuccessAction([]));
+      const pages = [];
+      
+      snapshot.forEach(childSnapshot => {
+        const page = childSnapshot.val();
+        console.log(JSON.stringify(page));
+        pages.push(page);
+      });
+      
+      dispatch(fetchPagesSuccessAction(pages));
     }).catch(e => {
       console.log("error:" + e);
       dispatch(fetchPagesFailureAction(e));

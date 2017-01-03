@@ -7,7 +7,7 @@ import classnames from "classnames";
 import Textfield from 'material-ui/Textfield';
 import Paper from 'material-ui/Paper';
 
-const PageEditor = ({ pageId, pageText, leaveEditMode, pageTextChanged }) => {
+const PageEditor = ({ pageId, pageName, pageText, storePage, pageTextChanged }) => {
     return (
         <Paper className={styles.column} zDepth={2}>
             <div className={styles['u-margin-left-right-10']}>
@@ -16,7 +16,7 @@ const PageEditor = ({ pageId, pageText, leaveEditMode, pageTextChanged }) => {
                     className={classnames(styles.column, styles.display)}
                     multiLine={true}
                     value={pageText}
-                    onBlur={leaveEditMode}
+                    onBlur={() => storePage(pageId, pageName, pageText)}
                     onChange={e => pageTextChanged(pageId, e.target.value) }
                     fullWidth={true}
                     underlineShow={false}
