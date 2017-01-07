@@ -8,7 +8,7 @@ const PageItem = ({page, selectPage, removePage}) => {
     return (
         <div>
             <ListItem
-                primaryText={page.name}
+                secondaryText={page.name}
                 onTouchTap={() => selectPage(page.id)}
                 rightIcon={<Delete onClick={() => removePage(page.id)}/>}
              />
