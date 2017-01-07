@@ -6,7 +6,7 @@ import classnames from "classnames";
 import MarkdownElement from "./MarkdownElement";
 import Paper from 'material-ui/Paper';
 
-const PageDisplay = ({ pageText, enterEditMode }) => {
+const PageDisplay = ({ activePageId, pageText, enterEditMode }) => {
     return (
         <Paper
             className={classnames(styles.column)}
@@ -14,7 +14,7 @@ const PageDisplay = ({ pageText, enterEditMode }) => {
             style={{ backgroundColor: 'navajowhite' }}
             onTouchTap={enterEditMode}
             >
-            <MarkdownElement text={pageText} />
+            <MarkdownElement text={activePageId} />
         </Paper>
     )
 }

@@ -6,12 +6,13 @@ import { config } from './myfirebase';
 
 import { reactReduxFirebase, firebaseStateReducer, getFirebase } from 'react-redux-firebase'
 
-//import reducers from './reducers/index'
+import reducers from './reducers/index'
 
 const logger = createLogger();
 
 const rootReducer = combineReducers({
-  firebase: firebaseStateReducer
+  firebase: firebaseStateReducer,
+  local: reducers
 })
 
 const enhancer = compose(

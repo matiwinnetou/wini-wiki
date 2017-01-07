@@ -1,4 +1,9 @@
-const reducers = (state, action) => {
+const initialState = {
+  editing: false,
+  activePageId: null
+}
+
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case "SELECT_PAGE": {
       return Object.assign({}, state, { activePageId: action.pageId })
@@ -47,14 +52,6 @@ const reducers = (state, action) => {
       }
 
       return stateCopy;
-    }
-
-    case "FETCHED_PAGES": {
-      if (action.status === "SUCCESS") {
-        return Object.assign({}, state, { pages: action.payload.pages });
-      }
-
-      return Object.assign({}, state);
     }
 
     default:
