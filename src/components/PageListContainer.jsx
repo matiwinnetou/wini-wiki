@@ -1,13 +1,9 @@
 import React from 'react';
 
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchPages } from "../actions/index";
 
 import { firebaseConnect, helpers } from 'react-redux-firebase'
-const { isLoaded, isEmpty, dataToJS } = helpers
-
-import { pure, compose, lifecycle } from "recompose";
+const { isLoaded, dataToJS } = helpers
 
 import PageList from "./PageList.jsx";
 
@@ -29,7 +25,7 @@ const PageListContainer = ({ rawPages }) => {
 }
 
 const wrappedPageList = firebaseConnect([
-    '/pages'
+    '/pages#limitToFirst=10'
 ])(PageListContainer)
 
 export default connect(
@@ -37,28 +33,3 @@ export default connect(
         rawPages: dataToJS(firebase, '/pages'),
     })
 )(wrappedPageList)
-
-// function mapStateToProps(state) {
-//     return {
-//         pages: state.pages
-//     };
-// }
-
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators({
-//         fetchPages: fetchPages
-//     }, dispatch);
-// }
-
-// const enhance = compose(
-//     connect(mapStateToProps, mapDispatchToProps),
-//     pure,
-//     lifecycle({
-//         componentDidMount() {
-//             const { fetchPages } = this.props;
-//             fetchPages();
-//         }
-//     })
-// );
-
-//export default enhance(PageListContainer);

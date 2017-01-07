@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { config } from './myfirebase';
 
-import { reactReduxFirebase, firebaseStateReducer } from 'react-redux-firebase'
+import { reactReduxFirebase, firebaseStateReducer, getFirebase } from 'react-redux-firebase'
 
 //import reducers from './reducers/index'
 
@@ -15,14 +15,10 @@ const rootReducer = combineReducers({
 })
 
 const enhancer = compose(
-    applyMiddleware(logger, thunk),
-    reactReduxFirebase(config, { userProfile: 'users' }),
+    applyMiddleware(logger, thunk.withExtraArgument(getFirebase)),
+    reactReduxFirebase(config, { userProfile: 'users', enableLogging: true }),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 );
-
-// const enhancer = compose(
-//     reactReduxFirebase(config, { userProfile: 'users' }),
-// );
 
 const store = createStore(rootReducer,
     enhancer
