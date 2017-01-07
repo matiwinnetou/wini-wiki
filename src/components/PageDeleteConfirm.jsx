@@ -1,50 +1,50 @@
-import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+// import React from 'react';
+// import Dialog from 'material-ui/Dialog';
+// import FlatButton from 'material-ui/FlatButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 
-class PageDeleteConfirm extends React.Component {
+// class PageDeleteConfirm extends React.Component {
 
-  state = {
-    open: false,
-  };
+//   state = {
+//     open: false,
+//   };
 
-  handleOpen = () => {
-    this.setState({open: true});
-  };
+//   handleOpen = () => {
+//     this.setState({open: true});
+//   };
 
-  handleClose = () => {
-    this.setState({open: false});
-  };
+//   handleClose = () => {
+//     this.setState({open: false});
+//   };
 
-  render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Discard"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-    ];
+//   render() {
+//     const actions = [
+//       <FlatButton
+//         label="Cancel"
+//         primary={true}
+//         onTouchTap={this.handleClose}
+//       />,
+//       <FlatButton
+//         label="Discard"
+//         primary={true}
+//         onTouchTap={this.handleClose}
+//       />,
+//     ];
 
-    return (
-      <div>
-        <RaisedButton label="Alert" onTouchTap={this.handleOpen} />
-        <Dialog
-          actions={actions}
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
-          Delete page?
-        </Dialog>
-      </div>
-    );
-  }
-}
+//     return (
+//       <div>
+//         <RaisedButton label="Alert" onTouchTap={this.handleOpen} />
+//         <Dialog
+//           actions={actions}
+//           modal={false}
+//           open={this.state.open}
+//           onRequestClose={this.handleClose}
+//         >
+//           Delete page?
+//         </Dialog>
+//       </div>
+//     );
+//   }
+// }
 
-export default PageDeleteConfirm;
+// export default PageDeleteConfirm;

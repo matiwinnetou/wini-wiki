@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-
-import PageItemDelete from "./PageItemDelete";
+import Delete from 'material-ui/svg-icons/action/delete';
 
 const PageItem = ({page, selectPage, removePage}) => {
     return (
@@ -11,7 +10,7 @@ const PageItem = ({page, selectPage, removePage}) => {
             <ListItem
                 primaryText={page.name}
                 onTouchTap={() => selectPage(page.id)}
-                rightIconButton={<PageItemDelete pageId={page.id} removePage={removePage} />}
+                rightIcon={<Delete onClick={() => removePage(page.id)}/>}
              />
             <Divider />
         </div>
