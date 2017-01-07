@@ -18,17 +18,6 @@ const App = ({ editing }) => {
             <PageListContainer />
           </div>
         </div>
-
-        <div className={styles['col-xs-10']}>
-          <div className={styles.box}>
-            {editing &&
-              <PageEditorContainer />
-            }
-            {!editing &&
-              <PageDisplayContainer />
-            }
-          </div>
-        </div>
       </div>
     </div>
   )

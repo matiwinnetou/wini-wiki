@@ -10,24 +10,19 @@ import FontIcon from 'material-ui/FontIcon';
 
 import PageItemContainer from "./PageItemContainer.jsx";
 
-const PageList = ({ pages }) => {
-    return (
-      <div>
-        <Paper className={styles.column} zDepth={2}>
-          <List>
-            <Subheader>Pages</Subheader>
-            {
-              pages.map(page => {
-                return <PageItemContainer 
-                  key={page.id}
-                  page={page}
-               />
-              })
-            }
-          </List>
-        </Paper>
-      </div>
-    )
+const PageList = ({ isLoading, pages }) => {
+  return (
+    <div>
+      <Paper className={styles.column} zDepth={2}>
+        <List>
+          <Subheader>Pages {isLoading ? "(loading...)" : ""}</Subheader>
+          {pages.map(page => {
+            return <PageItemContainer key={page.id} page={page} />
+          })}
+        </List>
+      </Paper>
+    </div>
+  )
 }
 
 export default PageList;

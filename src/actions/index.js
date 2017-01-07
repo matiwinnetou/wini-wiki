@@ -1,5 +1,5 @@
 import Chance from "chance";
-import firebase from "../myfirebase";
+import { firebase } from "../myfirebase";
 
 const chance = new Chance();
 
