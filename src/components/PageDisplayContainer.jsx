@@ -9,35 +9,31 @@ import { firebaseConnect, helpers } from 'react-redux-firebase'
 
 import PageDisplay from "./PageDisplay";
 
-const { dataToJS } = helpers
+const { isLoaded, dataToJS } = helpers
 
-// function processRawPages(rawPages) {
-//     const pagesList = [];
-
-//     if (isLoaded(rawPages)) {
-//         Object.keys(rawPages).map((key, id) => {
-//             pagesList.push(rawPages[key]);
-//         })
-//         return (<PageList isLoading={false} pages={pagesList} />)
-//     }
-
-//     return (<PageList isLoading={true} pages={[]} />)
-// }
-
-const PageDisplayContainer = ({ activePageId, pageText, enterEditMode }) => {
+const PageDisplayContainer = ({ pageText, enterEditMode }) => {
     return (
         <PageDisplay
             enterEditMode={enterEditMode}
             pageText={pageText}
-            activePageId={activePageId}
         />
     )
 }
 
 function mapStateToProps(state) {
+    const activePageId = state.local.activePageId;
+    const rawPages = dataToJS(state.firebase, '/pages');
+
+    let pageText = "";
+    if (!isLoaded(rawPages)) {
+        pageText = "refreshing...";
+    } else {
+        const activePage = rawPages[activePageId];
+        pageText = activePage ? activePage.text : "";
+    }
+
     return {
-        activePageId: state.local.activePageId,
-        rawPages: dataToJS(state.firebase, '/pages')
+        pageText: pageText
     };
 }
 
@@ -47,9 +43,14 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
+// TODO some query because loading all pages is overkill!!!
+// const firebasePageDisplayContainer = firebaseConnect([
+//     '/pages#orderByKey&equalTo=b4fd8b5c5ce15f738e7a4057ffa867e00c83ce16ddf85f199c96e05ab9ff8bf3'
+// ])(PageDisplayContainer)
+
+// TODO some query because loading all pages is overkill!!!
 const firebasePageDisplayContainer = firebaseConnect([
     '/pages'
 ])(PageDisplayContainer)
 
 export default connect(mapStateToProps, mapDispatchToProps)(firebasePageDisplayContainer);
-//export default PageDisplayContainer;
