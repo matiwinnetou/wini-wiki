@@ -17,8 +17,7 @@ const PageList = ({ isLoading, rawPages }) => {
         <List>
           <Subheader>Pages {isLoading ? "(loading...)" : ""}</Subheader>
           {Object.keys(rawPages).map((key, id) => {
-            const page = rawPages[key];
-            return <PageItemContainer key={page.id} page={page} />
+            return <PageItemContainer key={key} page={rawPages[key]} />
           })}
         </List>
       </Paper>
