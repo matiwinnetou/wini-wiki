@@ -33,12 +33,9 @@ const reducers = (state = initialState, action) => {
     }
 
     case "DELETE_PAGE": {
-      const pagesCopy = state.pages.filter(page => page.id !== action.pageId);
-
       return Object.assign({}, state, {
         activePageId: null,
-        editing: false,
-        pages: pagesCopy
+        editing: false
       })
     }
 

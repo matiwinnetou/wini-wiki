@@ -3,11 +3,14 @@ import styles from './../styles/styles.scss';
 import React, { Component } from 'react';
 import classnames from "classnames";
 
-import MarkdownElement from "./MarkdownElement";
 import Paper from 'material-ui/Paper';
+import CircularProgress from 'material-ui/CircularProgress'
 
-const PageDisplay = ({ pageText, enterEditMode }) => {
+import MarkdownElement from "./MarkdownElement";
+
+const PageDisplay = ({ pageText, isLoading, enterEditMode }) => {
     return (
+        isLoading ? <CircularProgress /> : 
         <Paper
             className={classnames(styles.column)}
             zDepth={2}

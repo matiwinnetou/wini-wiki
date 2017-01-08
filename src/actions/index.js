@@ -21,9 +21,9 @@ const createNewPageFailureAction = (page) => {
 
 export const createNewPage = () => {
   const page = {
-      id: chance.apple_token(),
-      name: "New Page",
-      text: ''
+    id: chance.apple_token(),
+    name: "New Page",
+    text: ''
   };
 
   return dispatch => {
@@ -48,22 +48,16 @@ const removePageSuccessAction = (pageId) => {
   }
 }
 
-const removePageFailureAction = (pageId) => {
-  return {
-    type: 'DELETE_PAGE',
-    status: 'FAILURE',
-    pageId: pageId
-  }
-}
-
 export const removePage = (pageId) => {
-  return dispatch => {
-    console.log("Removing:" + pageId);
-    firebase.database().ref("pages/" + pageId).remove().then(() => {
-      dispatch(removePageSuccessAction(pageId));
-    }).catch(() => {
-      dispatch(removePageFailureAction(pageId));
-    });
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase();
+
+    firebase.remove(`/pages/${pageId}`);
+
+    dispatch({
+      type: 'DELETE_PAGE',
+      pageId: pageId
+    })
   }
 }
 
@@ -100,16 +94,6 @@ export const pageTextChanged = (pageId, pageText) => {
   }
 }
 
-const storePageSuccessAction = pageId => {
-  return {
-    type: 'STORED_PAGE',
-    status: 'SUCCESS',
-    payload: {
-      pageId: pageId
-    }
-  }
-}
-
 export const storePage = (pageId, pageName, pageText) => {
   return dispatch => {
     firebase.database().ref("pages/" + pageId).set({
@@ -122,44 +106,6 @@ export const storePage = (pageId, pageName, pageText) => {
     }).catch(ex => {
       console.error("Store failed:" + ex);
       dispatch(leaveEditMode());
-    });
-  }
-}
-
-export const fetchPagesSuccessAction = pages => {
-  return {
-    type: 'FETCHED_PAGES',
-    status: 'SUCCESS',
-    payload: {
-      pages: pages
-    }
-  }
-}
-
-export const fetchPagesFailureAction = errMsg => {
-  return {
-    type: 'FETCHED_PAGES',
-    status: 'FAILURE',
-    errorMsg: errMsg,
-    payload: {
-      pages: []
-    }
-  }
-}
-
-export const fetchPages = () => {
-  return dispatch => {
-    firebase.database().ref('pages').once('value').then(snapshot => {
-      const pages = [];
-
-      snapshot.forEach(childSnapshot => {
-        pages.push(childSnapshot.val());
-      });
-
-      dispatch(fetchPagesSuccessAction(pages));
-    }).catch(e => {
-      console.error("Error:" + e);
-      dispatch(fetchPagesFailureAction(e));
     });
   }
 }

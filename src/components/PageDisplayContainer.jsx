@@ -11,11 +11,12 @@ import PageDisplay from "./PageDisplay";
 
 const { isLoaded, dataToJS } = helpers
 
-const PageDisplayContainer = ({ pageText, enterEditMode }) => {
+const PageDisplayContainer = ({ pageText, isLoading, enterEditMode }) => {
     return (
         <PageDisplay
             enterEditMode={enterEditMode}
             pageText={pageText}
+            isLoading={isLoading}
         />
     )
 }
@@ -25,15 +26,17 @@ function mapStateToProps(state) {
     const rawPages = dataToJS(state.firebase, '/pages');
 
     let pageText = "";
-    if (!isLoaded(rawPages)) {
-        pageText = "refreshing...";
-    } else {
+    let isLoading = true;
+
+    if (isLoaded(rawPages)) {
         const activePage = rawPages[activePageId];
         pageText = activePage ? activePage.text : "";
+        isLoading = false;
     }
 
     return {
-        pageText: pageText
+        pageText: pageText,
+        isLoading: isLoading
     };
 }
 

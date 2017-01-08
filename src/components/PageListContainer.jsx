@@ -5,21 +5,30 @@ import { connect } from "react-redux";
 import { firebaseConnect, helpers } from 'react-redux-firebase'
 const { isLoaded, dataToJS } = helpers
 
+import { bindActionCreators } from "redux";
+
 import PageList from "./PageList.jsx";
 
-const PageListContainer = ({ rawPages }) => {
-    return (isLoaded(rawPages) ?
-       <PageList isLoading={false} rawPages={rawPages} />
-     : <PageList isLoading={true} rawPages={{}} />
-     )
+const PageListContainer = ({ isLoading, rawPages }) => {
+    return <PageList isLoading={isLoading} rawPages={rawPages} />
 }
 
-const wrappedPageList = firebaseConnect([
+function mapStateToProps(state) {
+    const rawPages = dataToJS(state.firebase, '/pages');
+
+    return {
+        rawPages: rawPages || {},
+        isLoading: !isLoaded(rawPages)
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+    }, dispatch);
+}
+
+const firebasePageListContainer = firebaseConnect([
     '/pages'
 ])(PageListContainer)
 
-export default connect(
-    ({firebase}) => ({
-        rawPages: dataToJS(firebase, '/pages'),
-    })
-)(wrappedPageList)
+export default connect(mapStateToProps, mapDispatchToProps)(firebasePageListContainer);
