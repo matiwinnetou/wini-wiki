@@ -22,7 +22,7 @@ const AppContainer = ({ editing }) => {
 
 function mapStateToProps(state) {
     return {
-        editing: state.editing
+        editing: state.local.editing
     };
 }
 

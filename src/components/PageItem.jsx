@@ -4,23 +4,17 @@ import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Delete from 'material-ui/svg-icons/action/delete';
 
-const PageItem = ({page, selectPage, removePage}) => {
+const PageItem = ({pageId, pageName, selectPage, removePage}) => {
     return (
         <div>
             <ListItem
-                primaryText={page.name}
-                onTouchTap={() => selectPage(page.id)}
-                rightIcon={<Delete onClick={() => removePage(page.id)}/>}
+                primaryText={pageName}
+                onTouchTap={() => selectPage(pageId)}
+                rightIcon={<Delete onClick={() => removePage(pageId)} />}
              />
             <Divider />
         </div>
     )
 }
-
-PageItem.propTypes = {
-    page: React.PropTypes.object.isRequired,
-    selectPage: React.PropTypes.func.isRequired,
-    removePage: React.PropTypes.func.isRequired
-};
 
 export default PageItem;

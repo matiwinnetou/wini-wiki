@@ -9,7 +9,7 @@ import { firebaseConnect, helpers } from 'react-redux-firebase'
 
 import PageDisplay from "./PageDisplay";
 
-const { isLoaded, dataToJS } = helpers
+const { isLoaded, isEmpty, dataToJS } = helpers
 
 const PageDisplayContainer = ({ pageText, isLoading, enterEditMode }) => {
     return (
@@ -28,7 +28,10 @@ function mapStateToProps(state) {
     let pageText = "";
     let isLoading = true;
 
-    if (isLoaded(rawPages)) {
+    if (isEmpty(rawPages)) {
+        pageText = "";
+        isLoading = false;
+    } else if (isLoaded(rawPages)) {
         const activePage = rawPages[activePageId];
         pageText = activePage ? activePage.text : "";
         isLoading = false;

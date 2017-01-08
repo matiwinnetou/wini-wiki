@@ -20,23 +20,18 @@ const createNewPageFailureAction = (page) => {
 }
 
 export const createNewPage = () => {
-  const page = {
+  const newPage = {
     id: chance.apple_token(),
     name: "New Page",
-    text: ''
+    text: ""
   };
 
-  return dispatch => {
-    firebase.database().ref("pages/" + page.id).set({
-      id: page.id,
-      name: page.name,
-      text: page.text
-    }).then(() => {
-      dispatch(createNewPageSuccessAction(page));
-    }).catch(ex => {
-      console.error("Store failed:" + ex);
-      dispatch(createNewPageFailureAction(page));
-    });
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase();
+
+    const r = firebase.push('/pages', newPage);
+    console.log("r:" + r);
+    dispatch(createNewPageSuccessAction(newPage.id));
   }
 }
 
@@ -96,20 +91,21 @@ export const pageTextChanged = (pageId, pageText) => {
 
 export const storePage = (pageId, pageName, pageText) => {
   return dispatch => {
-    firebase.database().ref("pages/" + pageId).set({
-      id: pageId,
-      name: pageName,
-      text: pageText
-    }).then(() => {
-      dispatch(storePageSuccessAction(pageId));
-      dispatch(leaveEditMode());
-    }).catch(ex => {
-      console.error("Store failed:" + ex);
-      dispatch(leaveEditMode());
-    });
+    dispatch(leaveEditMode());
   }
 }
 
-export const findActivePage = (pages, activePageId) => {
-  return pages.find(page => page.id === activePageId);
-}
+  // return dispatch => {
+  //   firebase.database().ref("pages/" + pageId).set({
+  //     id: pageId,
+  //     name: pageName,
+  //     text: pageText
+  //   }).then(() => {
+  //     dispatch(storePageSuccessAction(pageId));
+  //     dispatch(leaveEditMode());
+  //   }).catch(ex => {
+  //     console.error("Store failed:" + ex);
+  //     dispatch(leaveEditMode());
+  //   });
+ //  }
+//}

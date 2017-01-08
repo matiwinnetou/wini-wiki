@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-import { findActivePage, storePage, pageTextChanged } from "../actions/index";
+import { storePage, pageTextChanged } from "../actions/index";
 import { bindActionCreators } from "redux";
 
 import { pure, compose, withHandlers } from "recompose";
@@ -22,12 +22,10 @@ const PageEditorContainer = ({ pageId, pageName, pageText, storePage, pageTextCh
 }
 
 function mapStateToProps(state) {
-    const activePage = findActivePage(state.pages, state.activePageId);
-
     return {
-        pageId: activePage ? activePage.id : null,
-        pageName: activePage ? activePage.name : null,
-        pageText: activePage ? activePage.text : ""
+        pageId: "",
+        pageName: "",
+        pageText: ""
     };
 }
 

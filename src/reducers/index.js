@@ -11,8 +11,7 @@ const reducers = (state = initialState, action) => {
 
     case "CREATE_PAGE": {
       return Object.assign({}, state, {
-        editing: false,
-        pages: state.pages.concat(action.page)
+        editing: false
       })
     }
 
@@ -41,12 +40,6 @@ const reducers = (state = initialState, action) => {
 
     case "PAGE_TEXT_CHANGED": {
       const stateCopy = Object.assign({}, state);
-
-      const page = stateCopy.pages.find(page => page.id === action.pageId);
-
-      if (page) {
-        page.text = action.pageText;
-      }
 
       return stateCopy;
     }
