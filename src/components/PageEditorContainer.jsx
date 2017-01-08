@@ -2,17 +2,17 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-import { storePage, pageTextChanged } from "../actions/index";
+import { leaveEditMode, pageTextChanged } from "../actions/index";
 import { bindActionCreators } from "redux";
 
 import PageEditor from "./PageEditor";
 
-const PageEditorContainer = ({ pageId, pageText, storePage, pageTextChanged }) => {
+const PageEditorContainer = ({ pageId, pageText, leaveEditMode, pageTextChanged }) => {
     return (
         <PageEditor
             pageId={pageId}
             pageText={pageText}
-            storePage={storePage}
+            leaveEditMode={leaveEditMode}
             pageTextChanged={pageTextChanged}
             />
     )
@@ -27,7 +27,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        storePage: storePage,
+        leaveEditMode: leaveEditMode,
         pageTextChanged: pageTextChanged
     }, dispatch);
 }

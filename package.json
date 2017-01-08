@@ -15,7 +15,6 @@
   "license": "MIT",
   "homepage": "https://github.com/matiwinnetou/wini-wiki#readme",
   "dependencies": {
-    "chance": "^1.0.4",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "eslint": "^3.13.0",

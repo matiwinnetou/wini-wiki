@@ -7,7 +7,7 @@ export const createNewPage = () => {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
 
-    const r = firebase.push('/pages', newPage, () => {
+    firebase.push('/pages', newPage, () => {
       dispatch({
         type: 'CREATE_PAGE',
         page: newPage
@@ -39,10 +39,14 @@ export const selectPage = (pageId, pageText) => {
   }
 }
 
-export const leaveEditMode = () => {
-  return dispatch => {
-    dispatch({
-      type: 'LEAVE_EDIT_MODE'
+export const leaveEditMode = (pageId, pageText) => {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase();
+
+    firebase.update(`/pages/${pageId}`, { text: pageText }, () => {
+      dispatch({
+        type: 'LEAVE_EDIT_MODE'
+      });
     });
   }
 }
@@ -64,22 +68,4 @@ export const pageTextChanged = (pageId, pageText) => {
       pageText: pageText
     }
   };
-
-  //  return (dispatch, getState, getFirebase) => {
-  // const firebase = getFirebase();
-
-  // firebase.update(`/pages/${pageId}`, { text: pageText }, () => {
-  //   dispatch({
-  //     type: 'PAGE_TEXT_CHANGED',
-  //     pageId: pageId,
-  //     pageText: pageText
-  //   });
-  // });
-  //  }
-}
-
-export const storePage = (pageId, pageText) => {
-  return dispatch => {
-    dispatch(leaveEditMode());
-  }
 }
