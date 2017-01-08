@@ -9,8 +9,7 @@ export const createNewPage = () => {
 
     firebase.push('/pages', newPage, () => {
       dispatch({
-        type: 'CREATE_PAGE',
-        page: newPage
+        type: 'CREATE_PAGE'
       });
     });
   }
@@ -22,8 +21,7 @@ export const removePage = (pageId) => {
 
     firebase.remove(`/pages/${pageId}`, () => {
       dispatch({
-        type: 'DELETE_PAGE',
-        pageId: pageId
+        type: 'DELETE_PAGE'
       })
     });
   }
