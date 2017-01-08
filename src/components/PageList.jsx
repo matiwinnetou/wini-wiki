@@ -15,7 +15,13 @@ const PageList = ({ isLoading, rawPages }) => {
   const children = isLoading ? (<CircularProgress />) :
     Object.keys(rawPages).map((key, index) => {
       const page = rawPages[key];
-      return (<PageItemContainer key={key} pageId={key} pageName={page.name} />)
+      return (
+        <PageItemContainer
+          key={key}
+          pageId={key}
+          pageName={page.name}
+          pageText={page.text}
+          />)
     })
 
   return (

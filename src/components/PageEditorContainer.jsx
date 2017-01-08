@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import { storePage, pageTextChanged } from "../actions/index";
 import { bindActionCreators } from "redux";
 
-import { firebaseConnect, helpers } from 'react-redux-firebase'
-
-const { isLoaded, isEmpty, dataToJS } = helpers
-
 import PageEditor from "./PageEditor";
 
 const PageEditorContainer = ({ pageId, pageText, storePage, pageTextChanged }) => {
@@ -23,18 +19,9 @@ const PageEditorContainer = ({ pageId, pageText, storePage, pageTextChanged }) =
 }
 
 function mapStateToProps(state) {
-    const activePageId = state.local.activePageId;
-    const rawPages = dataToJS(state.firebase, '/pages');
-
-    let pageText = "";
-    if (isLoaded(rawPages)) {
-        const activePage = rawPages[activePageId];
-        pageText = activePage ? activePage.text : "";
-    }
-
     return {
-        pageId: activePageId,
-        pageText: pageText
+        pageId: state.local.activePageId,
+        pageText: state.local.activePageText
     };
 }
 
@@ -45,8 +32,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-const firebasePageEditorContainer = firebaseConnect([
-    '/pages'
-])(PageEditorContainer)
-
-export default connect(mapStateToProps, mapDispatchToProps)(firebasePageEditorContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PageEditorContainer);

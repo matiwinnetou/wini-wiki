@@ -1,5 +1,3 @@
-import _debounce from "lodash/debounce";
-
 export const createNewPage = () => {
   const newPage = {
     name: "New Page",
@@ -31,10 +29,13 @@ export const removePage = (pageId) => {
   }
 }
 
-export const selectPage = (pageId) => {
+export const selectPage = (pageId, pageText) => {
   return {
     type: 'SELECT_PAGE',
-    pageId: pageId
+    payload: {
+      pageId: pageId,
+      pageText: pageText
+    }
   }
 }
 
@@ -46,30 +47,35 @@ export const leaveEditMode = () => {
   }
 }
 
-export const enterEditMode = () => {
+export const enterEditMode = (pageText) => {
   return {
-    type: 'ENTER_EDIT_MODE'
+    type: 'ENTER_EDIT_MODE',
+    payload: {
+      pageText: pageText
+    }
   }
 }
 
-// throttle this ever 2-3 secs
 export const pageTextChanged = (pageId, pageText) => {
-  return (dispatch, getState, getFirebase) => {
-    const firebase = getFirebase();
-
-    function pageTextChangedFunc() {
-      firebase.update(`/pages/${pageId}`, { text: pageText }, () => {
-        dispatch({
-          type: 'PAGE_TEXT_CHANGED',
-          pageId: pageId,
-          pageText: pageText
-        });
-      });
+  return {
+    type: 'PAGE_TEXT_CHANGED',
+    payload: {
+      pageId: pageId,
+      pageText: pageText
     }
+  };
 
-    //_debounce(pageTextChangedFunc, 1000);
-    pageTextChangedFunc();
-  }
+  //  return (dispatch, getState, getFirebase) => {
+  // const firebase = getFirebase();
+
+  // firebase.update(`/pages/${pageId}`, { text: pageText }, () => {
+  //   dispatch({
+  //     type: 'PAGE_TEXT_CHANGED',
+  //     pageId: pageId,
+  //     pageText: pageText
+  //   });
+  // });
+  //  }
 }
 
 export const storePage = (pageId, pageText) => {

@@ -6,11 +6,12 @@ import { bindActionCreators } from "redux";
 
 import PageItem from "./PageItem";
 
-const PageItemContainer = ({ pageId, pageName, selectPage, removePage}) => {
+const PageItemContainer = ({ pageId, pageName, pageText, selectPage, removePage}) => {
     return (
         <PageItem
             pageId={pageId}
             pageName={pageName}
+            pageText={pageText}
             selectPage={selectPage}
             removePage={removePage}
         />
@@ -19,7 +20,6 @@ const PageItemContainer = ({ pageId, pageName, selectPage, removePage}) => {
 
 function mapStateToProps(state) {
     return {
-
     };
 }
 

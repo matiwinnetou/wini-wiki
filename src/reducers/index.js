@@ -1,12 +1,16 @@
 const initialState = {
   editing: false,
+  activePageText: "",
   activePageId: null
 }
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
     case "SELECT_PAGE": {
-      return Object.assign({}, state, { activePageId: action.pageId })
+      return Object.assign({}, state, {
+        activePageId: action.payload.pageId,
+        activePageText: action.payload.pageText
+      })
     }
 
     case "CREATE_PAGE": {
@@ -20,7 +24,10 @@ const reducers = (state = initialState, action) => {
         return Object.assign({}, state, state)
       }
 
-      return Object.assign({}, state, { editing: true })
+      return Object.assign({}, state, {
+        editing: true,
+        activePageText: action.payload.pageText
+      })
     }
 
     case "LEAVE_EDIT_MODE": {
@@ -28,7 +35,9 @@ const reducers = (state = initialState, action) => {
         return Object.assign({}, state, state)
       }
 
-      return Object.assign({}, state, { editing: false })
+      return Object.assign({}, state, {
+        editing: false
+      })
     }
 
     case "DELETE_PAGE": {
@@ -39,9 +48,9 @@ const reducers = (state = initialState, action) => {
     }
 
     case "PAGE_TEXT_CHANGED": {
-      const stateCopy = Object.assign({}, state);
-
-      return stateCopy;
+      return Object.assign({}, state, {
+        activePageText: action.payload.pageText
+      });
     }
 
     default:

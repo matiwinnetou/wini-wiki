@@ -4,18 +4,16 @@ import React, { Component } from 'react';
 import classnames from "classnames";
 
 import Paper from 'material-ui/Paper';
-import CircularProgress from 'material-ui/CircularProgress'
 
 import MarkdownElement from "./MarkdownElement";
 
-const PageDisplay = ({ pageText, isLoading, enterEditMode }) => {
+const PageDisplay = ({ pageText, enterEditMode }) => {
     return (
-        isLoading ? <CircularProgress /> : 
         <Paper
             className={classnames(styles.column)}
             zDepth={2}
             style={{ backgroundColor: 'navajowhite' }}
-            onTouchTap={enterEditMode}
+            onTouchTap={() => enterEditMode(pageText)}
             >
             <MarkdownElement text={pageText} />
         </Paper>
