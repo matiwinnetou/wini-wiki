@@ -10,7 +10,10 @@ import { bindActionCreators } from "redux";
 import PageList from "./PageList.jsx";
 
 const PageListContainer = ({ isLoading, rawPages }) => {
-    return <PageList isLoading={isLoading} rawPages={rawPages} />
+    return <PageList 
+        isLoading={isLoading}
+        rawPages={rawPages}
+        />
 }
 
 function mapStateToProps(state) {

@@ -8,6 +8,7 @@ const reducers = (state = initialState, action) => {
   switch (action.type) {
     case "SELECT_PAGE": {
       return Object.assign({}, state, {
+        editing: false,
         activePageId: action.payload.pageId,
         activePageText: action.payload.pageText
       })
