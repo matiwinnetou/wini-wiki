@@ -1,27 +1,7 @@
-import Chance from "chance";
-import { firebase } from "../myfirebase";
-
-const chance = new Chance();
-
-const createNewPageSuccessAction = (page) => {
-  return {
-    type: 'CREATE_PAGE',
-    status: "SUCCESS",
-    page: page
-  }
-}
-
-const createNewPageFailureAction = (page) => {
-  return {
-    type: 'CREATE_PAGE',
-    status: "FAILURE",
-    page: page
-  }
-}
+import _debounce from "lodash/debounce";
 
 export const createNewPage = () => {
   const newPage = {
-    id: chance.apple_token(),
     name: "New Page",
     text: ""
   };
@@ -29,17 +9,12 @@ export const createNewPage = () => {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
 
-    const r = firebase.push('/pages', newPage);
-    console.log("r:" + r);
-    dispatch(createNewPageSuccessAction(newPage.id));
-  }
-}
-
-const removePageSuccessAction = (pageId) => {
-  return {
-    type: 'DELETE_PAGE',
-    status: 'SUCCESS',
-    pageId: pageId
+    const r = firebase.push('/pages', newPage, () => {
+      dispatch({
+        type: 'CREATE_PAGE',
+        page: newPage
+      });
+    });
   }
 }
 
@@ -47,12 +22,12 @@ export const removePage = (pageId) => {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
 
-    firebase.remove(`/pages/${pageId}`);
-
-    dispatch({
-      type: 'DELETE_PAGE',
-      pageId: pageId
-    })
+    firebase.remove(`/pages/${pageId}`, () => {
+      dispatch({
+        type: 'DELETE_PAGE',
+        pageId: pageId
+      })
+    });
   }
 }
 
@@ -63,15 +38,11 @@ export const selectPage = (pageId) => {
   }
 }
 
-const leaveEditModeSuccessAction = () => {
-  return {
-    type: 'LEAVE_EDIT_MODE'
-  }
-}
-
 export const leaveEditMode = () => {
   return dispatch => {
-    dispatch(leaveEditModeSuccessAction());
+    dispatch({
+      type: 'LEAVE_EDIT_MODE'
+    });
   }
 }
 
@@ -81,11 +52,23 @@ export const enterEditMode = () => {
   }
 }
 
+// throttle this ever 2-3 secs
 export const pageTextChanged = (pageId, pageText) => {
-  return {
-    type: 'PAGE_TEXT_CHANGED',
-    pageId: pageId,
-    pageText: pageText
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase();
+
+    function pageTextChangedFunc() {
+      firebase.update(`/pages/${pageId}`, { text: pageText }, () => {
+        dispatch({
+          type: 'PAGE_TEXT_CHANGED',
+          pageId: pageId,
+          pageText: pageText
+        });
+      });
+    }
+
+    //_debounce(pageTextChangedFunc, 1000);
+    pageTextChangedFunc();
   }
 }
 
@@ -94,18 +77,3 @@ export const storePage = (pageId, pageText) => {
     dispatch(leaveEditMode());
   }
 }
-
-  // return dispatch => {
-  //   firebase.database().ref("pages/" + pageId).set({
-  //     id: pageId,
-  //     name: pageName,
-  //     text: pageText
-  //   }).then(() => {
-  //     dispatch(storePageSuccessAction(pageId));
-  //     dispatch(leaveEditMode());
-  //   }).catch(ex => {
-  //     console.error("Store failed:" + ex);
-  //     dispatch(leaveEditMode());
-  //   });
- //  }
-//}
