@@ -13,7 +13,7 @@ import PageItemContainer from "./PageItemContainer.jsx";
 
 const PageList = ({ isLoading, rawPages }) => {
   const children = isLoading ? (<CircularProgress />) :
-    Object.keys(rawPages).map((key, id) => {
+    Object.keys(rawPages).map((key, index) => {
       const page = rawPages[key];
       return (<PageItemContainer key={key} pageId={key} pageName={page.name} />)
     })
