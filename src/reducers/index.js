@@ -43,6 +43,7 @@ const reducers = (state = initialState, action) => {
     case "DELETE_PAGE": {
       return Object.assign({}, state, {
         activePageId: null,
+        activePageText: "",
         editing: false
       })
     }
