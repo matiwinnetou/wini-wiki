@@ -89,7 +89,7 @@ export const pageTextChanged = (pageId, pageText) => {
   }
 }
 
-export const storePage = (pageId, pageName, pageText) => {
+export const storePage = (pageId, pageText) => {
   return dispatch => {
     dispatch(leaveEditMode());
   }

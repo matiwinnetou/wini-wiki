@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const firebasePageListContainer = firebaseConnect([
-    '/pages'
+    '/pages#orderByKey'
 ])(PageListContainer)
 
 export default connect(mapStateToProps, mapDispatchToProps)(firebasePageListContainer);
