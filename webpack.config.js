@@ -19,7 +19,7 @@ module.exports = {
 	},
 	resolve: {
 		modules: ['node_modules', 'src'],
-		extensions: ['', '.js', '.jsx']
+		extensions: ['.js', '.jsx']
 	},
 	module: {
 		loaders
