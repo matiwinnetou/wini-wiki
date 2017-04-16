@@ -18,6 +18,7 @@
 - rename pages with a popup and move delete action inside of popup as well on the right side of the list
 - router, when accessing page by id it should preselect it and when user navigates url should change
 - scrolling of text for editor and display or as much paper as content
+- ability to scroll pages in a list
 
 # Laterz
 - when loading first page should be preselected
