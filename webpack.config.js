@@ -1,6 +1,6 @@
 let webpack = require('webpack');
 let path = require('path');
-let loaders = require('./webpack.loaders');
+let rules = require('./webpack.loaders');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const HOST = process.env.HOST || "127.0.0.1";
@@ -22,7 +22,7 @@ module.exports = {
 		extensions: ['.js', '.jsx']
 	},
 	module: {
-		loaders
+		rules
 	},
 	devServer: {
 		contentBase: "./public",
@@ -33,7 +33,6 @@ module.exports = {
 		host: HOST
 	},
 	plugins: [
-		new webpack.NoErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			template: './src/template.html'
