@@ -20,7 +20,7 @@ const config = {
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   local: reducers
-})
+});
 
 const enhancer = compose(
     applyMiddleware(logger, thunk.withExtraArgument(getFirebase)),

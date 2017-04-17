@@ -2,7 +2,7 @@ const initialState = {
   editing: false,
   activePageText: "",
   activePageId: null
-}
+};
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
@@ -58,6 +58,6 @@ const reducers = (state = initialState, action) => {
     default:
       return state
   }
-}
+};
 
-export default reducers;
+export default reducers
