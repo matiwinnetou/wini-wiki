@@ -1,5 +1,4 @@
 import styles from './../styles/styles.scss';
-import classnames from "classnames";
 
 import React from 'react';
 
@@ -32,6 +31,6 @@ const App = ({ editing }) => {
       </div>
     </div>
   )
-}
+};
 
 export default App;

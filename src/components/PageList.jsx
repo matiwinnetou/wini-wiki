@@ -4,9 +4,7 @@ import React from 'react';
 
 import Paper from 'material-ui/Paper';
 import { List } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import FontIcon from 'material-ui/FontIcon';
 import CircularProgress from 'material-ui/CircularProgress'
 
 import PageItemContainer from "./PageItemContainer.jsx";
@@ -22,7 +20,7 @@ const PageList = ({ isLoading, rawPages }) => {
           pageName={page.name}
           pageText={page.text}
           />)
-    })
+    });
 
   return (
     <div>
@@ -32,8 +30,8 @@ const PageList = ({ isLoading, rawPages }) => {
           {children}
         </List>
       </Paper>
-    </div >
+    </div>
   )
-}
+};
 
 export default PageList;

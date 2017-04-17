@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -15,6 +15,6 @@ const PageItem = ({pageId, pageName, pageText, selectPage, removePage}) => {
             <Divider />
         </div>
     )
-}
+};
 
 export default PageItem;

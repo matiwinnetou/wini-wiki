@@ -22,6 +22,6 @@ const AppParent = () => {
             </MuiThemeProvider>
         </ReactHotLoaderAppContainer>
     );
-}
+};
 
 export default AppParent;

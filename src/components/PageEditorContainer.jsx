@@ -16,7 +16,7 @@ const PageEditorContainer = ({ pageId, pageText, leaveEditMode, pageTextChanged 
             pageTextChanged={pageTextChanged}
             />
     )
-}
+};
 
 function mapStateToProps(state) {
     return {

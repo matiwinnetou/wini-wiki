@@ -8,11 +8,11 @@ import TopBar from "./TopBar";
 
 const TopBarContainer = ({ createNewPage }) => {
     return (
-        <TopBar 
+        <TopBar
             createNewPage={createNewPage}
          />
     )
-}
+};
 
 function mapStateToProps(state) {
     return {};
@@ -24,4 +24,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopBarContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TopBarContainer)

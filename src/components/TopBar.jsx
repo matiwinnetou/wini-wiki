@@ -20,6 +20,6 @@ const TopBar = ({ createNewPage }) => {
         />
       </div>
     )
-}
+};
 
-export default TopBar;
+export default TopBar

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
@@ -16,7 +16,7 @@ const AppMenu = ({ onCreatePage }) => {
         </Popover>
       </div>
     );
-}
+};
 
 AppMenu.propTypes = {
   onCreatePage: React.PropTypes.func.isRequired

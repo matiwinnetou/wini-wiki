@@ -24,6 +24,6 @@ const PageEditor = ({ pageId, pageText, leaveEditMode, pageTextChanged }) => {
             </div>
         </Paper>
     )
-}
+};
 
 export default PageEditor;

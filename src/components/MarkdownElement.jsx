@@ -14,11 +14,11 @@ marked.setOptions({
 
 const MarkdownElement = ({ text }) => {
     const html = marked(text || '');
-    
+
     return (
         <div dangerouslySetInnerHTML={{ __html: html }} />
     );
-}
+};
 
 MarkdownElement.propTypes = {
     text: React.PropTypes.string.isRequired

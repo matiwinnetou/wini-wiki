@@ -3,18 +3,18 @@ import React from 'react';
 import { connect } from "react-redux";
 
 import { firebaseConnect, helpers } from 'react-redux-firebase'
-const { isLoaded, dataToJS } = helpers
+const { isLoaded, dataToJS } = helpers;
 
 import { bindActionCreators } from "redux";
 
 import PageList from "./PageList.jsx";
 
 const PageListContainer = ({ isLoading, rawPages }) => {
-    return <PageList 
+    return <PageList
         isLoading={isLoading}
         rawPages={rawPages}
         />
-}
+};
 
 function mapStateToProps(state) {
     const rawPages = dataToJS(state.firebase, '/pages');
@@ -32,6 +32,6 @@ function mapDispatchToProps(dispatch) {
 
 const firebasePageListContainer = firebaseConnect([
     '/pages#orderByKey'
-])(PageListContainer)
+])(PageListContainer);
 
 export default connect(mapStateToProps, mapDispatchToProps)(firebasePageListContainer);

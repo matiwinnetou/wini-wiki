@@ -14,7 +14,7 @@ const PageDisplayContainer = ({ pageText, enterEditMode }) => {
             pageText={pageText}
         />
     )
-}
+};
 
 function mapStateToProps(state) {
     return {

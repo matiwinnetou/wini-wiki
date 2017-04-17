@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { selectPage, removePage } from "../actions/index";
 import { connect } from "react-redux";
@@ -16,11 +16,10 @@ const PageItemContainer = ({ pageId, pageName, pageText, selectPage, removePage}
             removePage={removePage}
         />
     )
-}
+};
 
 function mapStateToProps(state) {
-    return {
-    };
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {
